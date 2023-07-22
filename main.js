@@ -87,23 +87,25 @@ document.addEventListener('DOMContentLoaded', function () {
     ];
 
     // Function to update the search results based on the user's input
-    function updateSearchResults(query) {
-        const matchedItems = coffeeObjects.filter(coffee => coffee.name.toLowerCase().includes(query));
 
-        searchResults.innerHTML = '';
+     function updateSearchResults(query) {
+    const matchedItems = coffeeObjects.filter(coffee => coffee.name.toLowerCase().includes(query.toLowerCase()));
 
-        matchedItems.forEach(item => {
-            const listItem = document.createElement('li');
-            listItem.textContent = item.name;
-            listItem.addEventListener('click', () => {
-                item.scrollIntoView({ behavior: 'smooth' });
-                console.log(`Clicked on: ${item.name}`);
-            });
-            searchResults.appendChild(listItem);
+    searchResults.innerHTML = '';
+
+    matchedItems.forEach(item => {
+        const listItem = document.createElement('li');
+        listItem.textContent = item.name;
+        listItem.addEventListener('click', () => {
+            item.scrollIntoView({ behavior: 'smooth' });
+            console.log(`Clicked on: ${item.name}`);
         });
+        searchResults.appendChild(listItem);
+    });
 
-        searchResults.style.display = matchedItems.length > 0 ? 'block' : 'none';
-    }
+    searchResults.style.display = matchedItems.length > 0 ? 'block' : 'none';
+}
+
 
     // Event listener for the search input
     searchInput.addEventListener('input', function () {
