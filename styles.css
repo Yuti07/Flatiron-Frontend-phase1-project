@@ -1,32 +1,58 @@
-
 body, h1, p {
-    margin: 0;
-    padding: 0;
-  }
+    margin: 100;
+    padding: 20;
+}
 
-  body {
-    font-family: Arial, sans-serif;
+body {
+    font-size: x-large;
+    font-display: auto;
     line-height: 1.6;
+     /* first background image */
     background-image: url("Images/what-is-house-blend-coffee.webp");
     background-size: cover;
     background-repeat: no-repeat;
+     /* Second background image */
+    background-image: url("Images/coffee-cups-set-vector-top-view-different-types-coffee-menu-hot-latte-cappuchino-americano-raf-coffee-fast-food-coffee-cups-set-111154302.webp");
+    background-size: cover;
+    background-repeat: no-repeat;
 
-     }
-  .container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-  }
+     /* Other styles for the body element */
+     font-family: Arial, sans-serif;
+     color: #333;
+     margin: 0;
+     padding: 0;
+     height: 50vh; /* Set the height of the body to cover the viewport */
+ }
 
-  h1 {
-    font-size: 28px;
-    color: #333;
-    margin-bottom: 20px;
-  }
+.search-container {
+    position: relative;
+    margin: 20px auto;
+    max-width: 400px;
+}
 
-  p {
+#search-input {
+    width: 100%;
+    padding: 10px;
     font-size: 16px;
-    color: #555;
-    margin-bottom: 10px;
-  }
+}
 
+#search-results {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    list-style: none;
+    padding: 0;
+    display: none;
+}
+
+#search-results li {
+    padding: 10px;
+    cursor: pointer;
+}
+
+#search-results li:hover {
+    background-color: #f1f1f1;
+}
