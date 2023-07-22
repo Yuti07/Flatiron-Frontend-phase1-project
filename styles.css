@@ -1,3 +1,32 @@
-body {
-    background-color: brown;
-}
+
+body, h1, p {
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-image: url("Images/what-is-house-blend-coffee.webp");
+    background-size: cover;
+    background-repeat: no-repeat;
+
+     }
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  h1 {
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 20px;
+  }
+
+  p {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 10px;
+  }
+
