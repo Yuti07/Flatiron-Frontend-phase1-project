@@ -1,6 +1,5 @@
-// JavaScript code for search functionality
 document.addEventListener('DOMContentLoaded', function () {
-    const coffeeTypes = document.querySelectorAll('ol li');
+    const coffeeList = document.getElementById('coffee-list');
     const searchInput = document.getElementById('search-input');
     const searchResults = document.getElementById('search-results');
 
@@ -8,12 +7,13 @@ document.addEventListener('DOMContentLoaded', function () {
         const query = searchInput.value.toLowerCase();
         const matchedItems = [];
 
-        coffeeTypes.forEach(item => {
-            const itemText = item.textContent.toLowerCase();
+        const coffeeItems = coffeeList.getElementsByTagName('li');
+        for (let i = 0; i < coffeeItems.length; i++) {
+            const itemText = coffeeItems[i].textContent.toLowerCase();
             if (itemText.includes(query)) {
-                matchedItems.push(item);
+                matchedItems.push(coffeeItems[i]);
             }
-        });
+        }
 
         updateSearchResults(matchedItems);
     });
@@ -25,9 +25,8 @@ document.addEventListener('DOMContentLoaded', function () {
             const listItem = document.createElement('li');
             listItem.textContent = item.textContent;
             listItem.addEventListener('click', () => {
-                // Add your code here to handle the click on a search result item.
-                // For example, you can scroll to the clicked item or navigate to it.
                 item.scrollIntoView({ behavior: 'smooth' });
+                console.log(`Clicked on: ${item.textContent}`);
             });
             searchResults.appendChild(listItem);
         });
