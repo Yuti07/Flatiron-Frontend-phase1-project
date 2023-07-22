@@ -1,21 +1,26 @@
-body, h1, p {
+body, h1,h2 {
     margin: 100;
     padding: 20;
+    color: black;
 }
 
+body, p ,ol,li{
+    margin: 50;
+    padding: 20;
+    color: rgb(22, 20, 20);
+}
 body {
-    font-size: x-large;
-    font-display: auto;
+
     line-height: 1.6;
     /* first background image */
-    background-image: url("Images/images.jpg"), url("Images/background-roasted-fresh-brown-coffee-beans-perfect-cool-wallpaper_181624-9592.avif");
-    background-size: cover;
+    background-image:url("Images/hot-coffee-table-winter-background_180633-1690.avif");
     background-repeat: no-repeat;
+    background-size: cover;
     /* background-position property if needed for each image */
 
     /* Other styles for the body element */
     font-family: 'Courier New', Courier, monospace, sans-serif;
-    color: #480f0f;
+    color: #333;
     margin: 0;
     padding: 0;
     height: 150vh; /*  height of the body to cover the viewport */
