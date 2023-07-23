@@ -58,3 +58,12 @@ body {
 #search-results li:hover {
     background-color: #c09999;
 }
+.image-container {
+    display: grid;
+    grid-template-columns: repeat(2, 200px);
+    grid-gap: 10px;
+  }
+  .equal-size-image {
+    width: 200px;
+    height: 150px;
+  }
