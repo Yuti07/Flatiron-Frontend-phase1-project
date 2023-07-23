@@ -1,125 +1,44 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const coffeeList = document.getElementById('coffee-list');
-    const searchInput = document.getElementById('search-box');
-    const searchResults = document.getElementById('search-results');
-// coffee objects with name, type, description, and image properties
-const coffeeObjects = [
-    {
-        name: 'Espresso',
-        type: 'Concentrated Coffee',
-        description: 'A concentrated coffee brewed by forcing hot water through finely-ground coffee beans. It forms the base for various coffee drinks.',
-        image: 'Images/expresso.jpg',
-    },
-    {
-        name: 'Americano',
-        type: 'Simple Coffee',
-        description: 'A simple coffee made by diluting a shot of espresso with hot water, resulting in a coffee similar to drip coffee but with a richer flavor.',
-        image: 'Images/Americano-Coffee-thmbnail.jpg',
-    },
+  const searchInput = document.getElementById('search-box');
+  const searchResults = document.getElementById('search-results');
 
-    {
-        name: 'Cappuccino',
-        type: 'Espresso-based Coffee',
-        description: 'Equal parts of espresso, steamed milk, and milk froth, creating a creamy and balanced coffee drink.',
-        image: 'Images/cappuccino.jpg',
-    },
-    {
-        name: 'Latte',
-        type: 'Espresso-based Coffee',
-        description: 'A coffee drink made with espresso and steamed milk, topped with a thin layer of milk froth.',
-        image: 'Images/latte.jpg',
-    },
-    {
-        name: 'Mocha',
-        type: 'Espresso-based Coffee',
-        description: 'A delightful blend of espresso, steamed milk, chocolate syrup, and whipped cream.',
-        image: 'Images/Mocha.jpg',
-    },
-    {
-        name: 'Macchiato',
-        type: 'Espresso-based Coffee',
-        description: 'An espresso with a small amount of milk or milk froth, giving it a bolder coffee flavor.',
-        image: 'Images/Macchiato.jpg',
-    },
-    {
-        name: 'Flat White',
-        type: 'Espresso-based Coffee',
-        description: 'Espresso with velvety microfoam milk, creating a smooth and strong coffee taste.',
-        image: 'Images/flat-white-coffee.webp',
-    },
-    {
-        name: 'Ice Coffee',
-        type: 'Espresso-based Coffee',
-        description: 'Chilled coffee served over ice, often sweetened and mixed with milk or cream',
-        image: 'Images/ice coffee.jpg',
-    },
-    {
-        name: 'Turkish coffee',
-        type: 'Espresso-based Coffee',
-        description: 'Finely ground coffee boiled with water and sugar, served unfiltered in a small cup with grounds settled at the bottom',
-        image: 'Images/turkish coffee.jpg',
-    },
-    {
-        name: 'French Press coffee',
-        type: 'Espresso-based Coffee',
-        description: 'Coarse coffee grounds steeped in hot water, and then pressed to separate the liquid from the grounds.',
-        image: 'Images/french press coffee.jpg',
-    },
-    {
-        name: 'Drip coffee',
-        type: 'Espresso-based Coffee',
-        description: 'Coffee brewed by slowly dripping water through ground coffee beans in a filter.',
-        image: 'Images/drip coffee.jpg',
-    },
-    {
-        name: 'Affogato',
-        type: 'Espresso-based Coffee',
-        description: 'A dessert consisting of a scoop of vanilla ice cream or gelato drowned in a shot of hot espresso.',
-        image: 'Images/Affogato coffee.jpg',
-    },
-    {
-        name: 'Irish coffee',
-        type: 'Espresso-based Coffee',
-        description: 'A cocktail made with hot coffee, Irish whiskey, sugar, and topped with whipped cream',
-        image: 'Images/irish-coffee.jpg'
-}];
- // Add event listener to the search box
- const searchBox = document.getElementById('search-box');
- searchBox.addEventListener('keypress', function (event) {
-   if (event.key === 'Enter') {
-     event.preventDefault();
-     const searchTerm = searchBox.value.trim().toLowerCase();
-     const coffeeSections = document.querySelectorAll('main > section');
-     for (const section of coffeeSections) {
-       const sectionTitle = section.querySelector('h3').textContent.toLowerCase();
-       if (sectionTitle.includes(searchTerm)) {
-         section.scrollIntoView({ behavior: 'smooth' });
-         break;
-       }
-     }
-   }
- });
-
-    // Function to update the search results based on the user's input
-    function updateSearchResults(query) {
-      const matchedItems = coffeeObjects.filter(
-        (coffee) => coffee.name.toLowerCase().includes(query.toLowerCase())
-      );
-      searchResults.innerHTML = '';
-
-      matchedItems.forEach((item) => {
-        const listItem = document.createElement('li');
-        listItem.textContent = item.name;
-        listItem.addEventListener('click', () => {
-          scrollToCoffeeType(item.name);
-          displayCoffeeContent(item);
-          console.log(`Clicked on: ${item.name}`);
-        });
-        searchResults.appendChild(listItem);
-      });
-
-      searchResults.style.display = matchedItems.length > 0 ? 'block' : 'none';
+  // Add event listener to the search box
+  searchInput.addEventListener('keypress', function (event) {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      const searchTerm = searchInput.value.trim().toLowerCase();
+      const coffeeSections = document.querySelectorAll('main > section');
+      for (const section of coffeeSections) {
+        const sectionTitle = section.querySelector('h3').textContent.toLowerCase();
+        if (sectionTitle.includes(searchTerm)) {
+          section.scrollIntoView({ behavior: 'smooth' });
+          break;
+        }
+      }
     }
+  });
+
+  // Function to update the search results based on the user's input
+  function updateSearchResults(query) {
+    const matchedItems = coffeeObjects.filter(
+      (coffee) => coffee.name.toLowerCase().includes(query.toLowerCase())
+    );
+    searchResults.innerHTML = '';
+
+    matchedItems.forEach((item) => {
+      const listItem = document.createElement('li');
+      listItem.textContent = item.name;
+      listItem.addEventListener('click', () => {
+        scrollToCoffeeType(item.name);
+        displayCoffeeContent(item);
+        console.log(`Clicked on: ${item.name}`);
+      });
+      searchResults.appendChild(listItem);
+    });
+
+    searchResults.style.display = matchedItems.length > 0 ? 'block' : 'none';
+  }
+
   // Event listener for the search input
   searchInput.addEventListener('input', function () {
     const query = searchInput.value.toLowerCase();
@@ -131,39 +50,116 @@ const coffeeObjects = [
       searchResults.style.display = 'none';
     }
   });
-    function scrollToCoffeeType(type) {
-      const coffeeTypeElements = coffeeList.getElementsByTagName('li');
-      for (let i = 0; i < coffeeTypeElements.length; i++) {
-        const coffeeType = coffeeTypeElements[i].textContent.toLowerCase();
-        if (coffeeType === type.toLowerCase()) {
-          coffeeTypeElements[i].scrollIntoView({ behavior: 'smooth' });
-          break;
-        }
+
+  function scrollToCoffeeType(type) {
+    const coffeeTypeElements = document.querySelectorAll('main > section');
+    for (let i = 0; i < coffeeTypeElements.length; i++) {
+      const coffeeType = coffeeTypeElements[i].getAttribute('id');
+      if (coffeeType === type) {
+        coffeeTypeElements[i].scrollIntoView({ behavior: 'smooth' });
+        break;
       }
     }
+  }
 
-    function displayCoffeeContent(coffee) {
-      const coffeeSection = document.getElementById(coffee.name);
-      if (coffeeSection) {
-        const content = `
-          <h3>${coffee.name}</h3>
-          <p>${coffee.description}</p>
-          <img src="${coffee.image}" alt="${coffee.name}" style="width: 200px; height: 150px;">
-        `;
-        coffeeSection.innerHTML = content;
-      }
+  function displayCoffeeContent(coffee) {
+    const coffeeSection = document.getElementById(coffee.name);
+    if (coffeeSection) {
+      const content = `
+        <h3>${coffee.name}</h3>
+        <p>${coffee.description}</p>
+        <img src="${coffee.image}" alt="${coffee.name}" style="width: 200px; height: 150px;">
+      `;
+      coffeeSection.innerHTML = content;
     }
+  }
 
-    // Event listener for the search input
-    searchInput.addEventListener('input', function () {
-      const query = searchInput.value.toLowerCase();
-      updateSearchResults(query);
-
-      // Clear the search results and hide them if the search box is empty
-      if (query === '') {
-        searchResults.innerHTML = '';
-        searchResults.style.display = 'none';
-      }
+  const coffeeObjects = [
+    // Your coffee objects data here...
+    {
+      name: 'Espresso',
+      type: 'Concentrated Coffee',
+      description: 'A concentrated coffee brewed by forcing hot water through finely-ground coffee beans. It forms the base for various coffee drinks.',
+      image: 'Images/expresso.jpg',
+  },
+  {
+      name: 'Americano',
+      type: 'Simple Coffee',
+      description: 'A simple coffee made by diluting a shot of espresso with hot water, resulting in a coffee similar to drip coffee but with a richer flavor.',
+      image: 'Images/Americano-Coffee-thmbnail.jpg',
+  },
+  {
+      name: 'Cappuccino',
+      type: 'Espresso-based Coffee',
+      description: 'Equal parts of espresso, steamed milk, and milk froth, creating a creamy and balanced coffee drink.',
+      image: 'Images/cappuccino.jpg',
+  },
+  {
+      name: 'Latte',
+      type: 'Espresso-based Coffee',
+      description: 'A coffee drink made with espresso and steamed milk, topped with a thin layer of milk froth.',
+      image: 'Images/latte.jpg',
+  },
+  {
+      name: 'Mocha',
+      type: 'Espresso-based Coffee',
+      description: 'A delightful blend of espresso, steamed milk, chocolate syrup, and whipped cream.',
+      image: 'Images/Mocha.jpg',
+  },
+  {
+      name: 'Macchiato',
+      type: 'Espresso-based Coffee',
+      description: 'An espresso with a small amount of milk or milk froth, giving it a bolder coffee flavor.',
+      image: 'Images/Macchiato.jpg',
+  },
+  {
+      name: 'Flat-White',
+      type: 'Espresso-based Coffee',
+      description: 'Espresso with velvety microfoam milk, creating a smooth and strong coffee taste.',
+      image: 'Images/flat-white-coffee.webp',
+  },
+  {
+      name: 'Ice-Coffee',
+      type: 'Espresso-based Coffee',
+      description: 'Chilled coffee served over ice, often sweetened and mixed with milk or cream',
+      image: 'Images/ice coffee.jpg',
+  },
+  {
+      name: 'Turkish-Coffee',
+      type: 'Espresso-based Coffee',
+      description: 'Finely ground coffee boiled with water and sugar, served unfiltered in a small cup with grounds settled at the bottom',
+      image: 'Images/turkish coffee.jpg',
+  },
+  {
+      name: 'French-Press-Coffee',
+      type: 'Espresso-based Coffee',
+      description: 'Coarse coffee grounds steeped in hot water, and then pressed to separate the liquid from the grounds.',
+      image: 'Images/french press coffee.jpg',
+  },
+  {
+      name: 'Drip-Coffee',
+      type: 'Espresso-based Coffee',
+      description: 'Coffee brewed by slowly dripping water through ground coffee beans in a filter.',
+      image: 'Images/drip coffee.jpg',
+  },
+  {
+      name: 'Affogato',
+      type: 'Espresso-based Coffee',
+      description: 'A dessert consisting of a scoop of vanilla ice cream or gelato drowned in a shot of hot espresso.',
+      image: 'Images/Affogato coffee.jpg',
+  },
+  {
+      name: 'Irish-Coffee',
+      type: 'Espresso-based Coffee',
+      description: 'A cocktail made with hot coffee, Irish whiskey, sugar, and topped with whipped cream',
+      image: 'Images/irish-coffee.jpg'
+}];
+  const coffeeImages = document.querySelectorAll('.equal-size-image');
+  coffeeImages.forEach((image, index) => {
+    image.addEventListener('click', () => {
+      const coffeeType = coffeeObjects[index].name;
+      scrollToCoffeeType(coffeeType);
+      displayCoffeeContent(coffeeObjects[index]);
     });
-
   });
+});
