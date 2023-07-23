@@ -84,6 +84,17 @@ document.addEventListener('DOMContentLoaded', function () {
             description: 'A cocktail made with hot coffee, Irish whiskey, sugar, and topped with whipped cream',
             image: 'Images/irish-coffee.jpg'
 }];
+ // To Save coffeeObjects array to JSON file
+ function saveToJSONFile(data) {
+    const jsonData = JSON.stringify(data, null, 2);
+    const blob = new Blob([jsonData], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'coffees.json';
+    a.click();
+    URL.revokeObjectURL(url);
+  }
 
     // Function to update the search results based on the user's input
     function updateSearchResults(query) {
@@ -126,3 +137,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Initial search results update (in case there is pre-filled input)
     updateSearchResults('');
 });
+  // Save the coffeeObjects array to coffees.json
+  document.getElementById('save-to-json-btn').addEventListener('click', function () {
+    saveToJSONFile(coffeeObjects);
+  });
