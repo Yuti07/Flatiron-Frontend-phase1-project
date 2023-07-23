@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const searchInput = document.getElementById('search-box');
   const searchResults = document.getElementById('search-results');
 
-  // Add event listener to the search box
+  // Adding event listener to the search box
   searchInput.addEventListener('keypress', function (event) {
     if (event.key === 'Enter') {
       event.preventDefault();
