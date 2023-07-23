@@ -1,19 +1,20 @@
-body, h1,h2 {
-    margin: 100;
-    padding: 20;
+body, h1, h2 {
+    display: block;
+    margin: 100px;
+    padding: 20px;
     color: black;
 }
 
-body, p ,ol,li{
-    margin: 50;
-    padding: 20;
+body, p, ol, li {
+    margin: 50px;
+    padding: 20px;
     color: rgb(22, 20, 20);
 }
-body {
 
+body {
     line-height: 1.6;
     /* first background image */
-    background-image:url("Images/hot-coffee-table-winter-background_180633-1690.avif");
+    background-image: url("Images/hot-coffee-table-winter-background_180633-1690.avif");
     background-repeat: no-repeat;
     background-size: cover;
     /* background-position property if needed for each image */
@@ -23,10 +24,11 @@ body {
     color: #333;
     margin: 0;
     padding: 0;
-    height: 150vh; /*  height of the body to cover the viewport */
+    height: 150vh; /* height of the body to cover the viewport */
 }
+
 /* CSS for the search box */
- #search-box {
+#search-box {
     position: fixed;
     top: 20px;
     right: 20px;
@@ -35,7 +37,7 @@ body {
     border-radius: 5px;
     background-color: white;
     z-index: 9999;
-  }
+}
 
 #search-input {
     width: 100%;
@@ -44,9 +46,9 @@ body {
 }
 
 #search-results {
-    position:relative;
+    position: relative;
     top: 100%;
-    left: 50;
+    nav-right: 50;
     width: 60%;
     background-color: #e8dfdf;
     box-shadow: 0 4px 8px rgba(155, 126, 126, 0.1);
@@ -63,12 +65,20 @@ body {
 #search-results li::content {
     background-color: #e3b1b1;
 }
-/* .image-container {
-    display: flex;
-    grid-template-columns: repeat(2, 200px);
+
+/* Updated styles for the images */
+.image-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Change '200px' to '1fr' to use the available width */
     grid-gap: 10px;
-  } */
-  .equal-size-image {
-    width: 200px;
-    height: 150px;
-  }
+}
+
+.equal-size-image {
+    width: 100%; /* Set the width to occupy the whole column */
+    height: 200px;
+}
+
+/* Additional style for the ID containing the four coffee images */
+#four-coffees-container {
+    display: flex;
+}
