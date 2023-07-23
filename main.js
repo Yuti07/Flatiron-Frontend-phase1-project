@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   const coffeeObjects = [
-    // Your coffee objects data here...
+    //coffee objects data here...
     {
       name: 'Espresso',
       type: 'Concentrated Coffee',
