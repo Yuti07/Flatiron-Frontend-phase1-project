@@ -3,12 +3,15 @@ body, h1, h2 {
     margin: 100px;
     padding: 20px;
     color: black;
+    text-align: center;
+    font-weight: bold;
 }
 
-body, p, ol, li {
+p, ol, li {
     margin: 50px;
     padding: 20px;
     color: rgb(22, 20, 20);
+    text-align: left;
 }
 
 body {
@@ -17,6 +20,8 @@ body {
     background-image: url("Images/hot-coffee-table-winter-background_180633-1690.avif");
     background-repeat: no-repeat;
     background-size: cover;
+    background: position 1px;
+    text-align: center;
     /* background-position property if needed for each image */
 
     /* Other styles for the body element */
@@ -26,6 +31,35 @@ body {
     padding: 0;
     height: 150vh; /* height of the body to cover the viewport */
 }
+body {
+    text-align: center;
+  }
+
+  h1 {
+    font-weight: bold;
+    animation: flashing 2s infinite;
+    margin: 0;
+    padding: 0;
+  }
+
+  h2 {
+    font-weight: bold;
+    animation: flashing 2s infinite;
+    margin: 0;
+    padding: 0;
+  }
+
+  @keyframes flashing {
+    0% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.2;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
 
 /* CSS for the search box */
 #search-box {
@@ -43,6 +77,7 @@ body {
     width: 100%;
     padding: 10px;
     font-size: 16px;
+    text-align: right;
 }
 
 #search-results {
@@ -56,14 +91,17 @@ body {
     padding: 0;
     display: none;
 }
-
+#section p {
+    flex: 3;
+    text-align: justify;
+  }
 #search-results li {
     padding: 10px;
     cursor: pointer;
 }
 
 #search-results li::content {
-    background-color: #e3b1b1;
+    background-color: #c9a4a4;
 }
 
 /* Updated styles for the images */
@@ -81,4 +119,5 @@ body {
 /* Additional style for the ID containing the four coffee images */
 #four-coffees-container {
     display: flex;
+    margin: auto;
 }
