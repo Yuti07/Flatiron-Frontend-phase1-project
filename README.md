@@ -4,6 +4,7 @@ My Flatiron-Frontend-Phase1 project
 
 
 ![Alt Logo Here](Images/Logo.png)
+
 Welcome to BrewTales, your ultimate guide to the fascinating world of coffee! Whether you are a coffee enthusiast or just curious about the history and different types of coffee, this website is the perfect destination for you.
 
 Table of Contents
