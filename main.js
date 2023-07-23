@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const searchInput = document.getElementById('search-input');
     const searchResults = document.getElementById('search-results');
 
-    //  coffee objects with name, type, description, and image properties
+    // coffee objects with name, type, description, and image properties
     const coffeeObjects = [
         {
             name: 'Espresso',
@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', function () {
             description: 'A simple coffee made by diluting a shot of espresso with hot water, resulting in a coffee similar to drip coffee but with a richer flavor.',
             image: 'Images/Americano-Coffee-thmbnail.jpg',
         },
+
         {
             name: 'Cappuccino',
             type: 'Espresso-based Coffee',
@@ -81,38 +82,47 @@ document.addEventListener('DOMContentLoaded', function () {
             name: 'Irish coffee',
             type: 'Espresso-based Coffee',
             description: 'A cocktail made with hot coffee, Irish whiskey, sugar, and topped with whipped cream',
-            image: 'Images/irish-coffee.jpg',
-        },
-
-    ];
+            image: 'Images/irish-coffee.jpg'
+}];
 
     // Function to update the search results based on the user's input
+    function updateSearchResults(query) {
+        const matchedItems = coffeeObjects.filter(coffee => coffee.name.toLowerCase().includes(query.toLowerCase()));
 
-     function updateSearchResults(query) {
-    const matchedItems = coffeeObjects.filter(coffee => coffee.name.toLowerCase().includes(query.toLowerCase()));
+        searchResults.innerHTML = '';
 
-    searchResults.innerHTML = '';
-
-    matchedItems.forEach(item => {
-        const listItem = document.createElement('li');
-        listItem.textContent = item.name;
-        listItem.addEventListener('click', () => {
-            item.scrollIntoView({ behavior: 'smooth' });
-            console.log(`Clicked on: ${item.name}`);
+        matchedItems.forEach(item => {
+            const listItem = document.createElement('li');
+            listItem.textContent = item.name;
+            listItem.addEventListener('click', () => {
+                scrollToCoffeeType(item.name);
+                console.log(`Clicked on: ${item.name}`);
+            });
+            searchResults.appendChild(listItem);
         });
-        searchResults.appendChild(listItem);
-    });
 
-    searchResults.style.display = matchedItems.length > 0 ? 'block' : 'none';
-}
+        searchResults.style.display = matchedItems.length > 0 ? 'block' : 'none';
+    }
+  // Event listener for the search input
+  searchInput.addEventListener('input', function () {
+    const query = searchInput.value.toLowerCase();
+    updateSearchResults(query);
 
-
-    // Event listener for the search input
-    searchInput.addEventListener('input', function () {
-        const query = searchInput.value.toLowerCase();
-        updateSearchResults(query);
-    });
-
+    // Clear the search results and hide them if the search box is empty
+    if (query === '') {
+        searchResults.innerHTML = '';
+        searchResults.style.display = 'none';
+    }
+});
+    function scrollToCoffeeType(type) {
+        const coffeeTypeElements = coffeeList.getElementsByTagName('li');
+        for (let i = 0; i < coffeeTypeElements.length; i++) {
+            if (coffeeTypeElements[i].textContent.toLowerCase().includes(type.toLowerCase())) {
+                coffeeTypeElements[i].scrollIntoView({ behavior: 'smooth' });
+                break;
+            }
+        }
+    }
     // Initial search results update (in case there is pre-filled input)
     updateSearchResults('');
 });
