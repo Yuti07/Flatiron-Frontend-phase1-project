@@ -1,56 +1,71 @@
+
 document.addEventListener('DOMContentLoaded', function () {
+  //elements
   const searchInput = document.getElementById('search-box');
   const searchResults = document.getElementById('search-results');
   let coffeeObjects = []; // Array to store coffee data
 
   // Using Fetch coffee data from JSON file
-  async function fetchCoffeeData() {
-    try {
-      const response = await fetch('coffeeData.json');
-      coffeeObjects = await response.json();
-    } catch (error) {
-      console.error('Error fetching coffee data:', error);
-    }
+   function fetchCoffeeData() {
+    fetch("http://localhost:3000/coffee")
+    .then(response => response.json())
+    .then(data => { coffeeObjects = data;
+      generateCoffeeImages();
+  });
   }
+   // Function to generate coffee images dynamically
+   function generateCoffeeImages() {
+    const coffeeImageContainer = document.getElementById('four-coffees-container');
 
+    coffeeObjects.forEach((coffee, index) => {
+        const img = document.createElement('img');
+        img.className = 'equal-size-image';
+        img.src = coffee.image;
+        img.alt = coffee.name;
+        img.addEventListener('click', () => {
+            scrollToCoffeeType(coffee.name);
+            displayCoffeeContent(coffee);
+        });
+        coffeeImageContainer.appendChild(img);
+    });
+}
+  fetchCoffeeData();
   // Function to update the search results based on the user's input
   function updateSearchResults(query) {
     const matchedItems = coffeeObjects.filter(
       (coffee) => coffee.name.toLowerCase().includes(query.toLowerCase())
     );
-
-    // Clear the existing search results
-    while (searchResults.firstChild) {
-      searchResults.removeChild(searchResults.firstChild);
-    }
+    clearSearchResults();
 
     matchedItems.forEach((item) => {
-      const listItem = document.createElement('li');
-      listItem.textContent = item.name;
-      listItem.addEventListener('click', () => {
-        scrollToCoffeeType(item.name);
-        displayCoffeeContent(item);
-      });
+      const listItem = createListItem(item.name);
+      listItem.addEventListener('click', () => handleListItemClick(item.name));
       searchResults.appendChild(listItem);
-    });
+      });
 
     searchResults.style.display = matchedItems.length > 0 ? 'block' : 'none';
   }
-
-  // Event listener for the search input
-  searchInput.addEventListener('input', function () {
-    const query = searchInput.value.toLowerCase();
-    updateSearchResults(query);
-
-    // Clear the search results and hide them if the search box is empty
-    if (query === '') {
-      while (searchResults.firstChild) {
-        searchResults.removeChild(searchResults.firstChild);
-      }
-      searchResults.style.display = 'none';
+   // Clear search results
+  function clearSearchResults() {
+    while (searchResults.firstChild) {
+      searchResults.removeChild(searchResults.firstChild);
     }
-  });
-
+  }
+  // Create list item
+  function createListItem(text) {
+    const listItem = document.createElement('li');
+    listItem.textContent = text;
+    return listItem;
+  }
+  // Handle list item click event
+  function handleListItemClick(coffeeName) {
+    scrollToCoffeeType(coffeeName);
+    displayCoffeeContent(findCoffeeByName(coffeeName));
+  }
+ // Find coffee by name
+ function findCoffeeByName(name) {
+  return coffeeObjects.find(coffee => coffee.name === name);
+}
   function scrollToCoffeeType(type) {
     const coffeeTypeElements = document.querySelectorAll('main > section');
     for (let i = 0; i < coffeeTypeElements.length; i++) {
@@ -88,19 +103,27 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // Loading  coffee data and initialize the search input
-  fetchCoffeeData().then(() => {
+  fetchCoffeeData().then(data => {
+    coffeeObjects = data;
     // Adding Event listener to handle the Enter key press in the search box
-    searchInput.addEventListener('keypress', function (event) {
+    searchInput.addEventListener('input', () => {
+      const query = searchInput.value.toLowerCase();
+      updateSearchResults(query);
+
+      // Clear the search results and hide them if the search box is empty
+      if (query === '') {
+        clearSearchResults();
+        searchResults.style.display = 'none';
+      }
+    });
+    // Event listener for the Enter key press in the search box
+    searchInput.addEventListener('keypress', event => {
       if (event.key === 'Enter') {
         event.preventDefault();
         const searchTerm = searchInput.value.trim().toLowerCase();
-        const coffeeSections = document.querySelectorAll('main > section');
-        for (const section of coffeeSections) {
-          const sectionTitle = section.querySelector('h3').textContent.toLowerCase();
-          if (sectionTitle.includes(searchTerm)) {
-            section.scrollIntoView({ behavior: 'smooth' });
-            break;
-          }
+        const coffeeSection = document.getElementById(searchTerm);
+        if (coffeeSection) {
+          coffeeSection.scrollIntoView({ behavior: 'smooth' });
         }
       }
     });
