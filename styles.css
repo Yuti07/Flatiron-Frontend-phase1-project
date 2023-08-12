@@ -106,18 +106,22 @@ body {
 
 /* Updated styles for the images */
 .image-container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 10px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 10px;
+  justify-items: center; /* Center images horizontally */
 }
 
 .equal-size-image {
     width: 100%;
-    height: 200px;
+    height: auto;
+    max-height: 200px;
 }
 
 /* Additional style for the ID containing the four coffee images */
 #four-coffees-container {
     display: flex;
     margin: auto;
+    justify-content: space-around;
+    flex-wrap: wrap;
 }
